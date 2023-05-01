@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import br.org.ruds.entitys.Company;
@@ -18,10 +19,16 @@ public class CompanyServiceTest {
     @Inject
     CompanyService service;
 
+    private Company company;
+
+    @BeforeEach
+    public void setup() {
+        company = createCompany();
+    }
+
     @Test
     @TestTransaction
     public void testSave() {
-        Company company = createCompany();
         Optional<Company> actual = service.save(company);
         Optional<Company> expected = Optional.of(company);
         Assertions.assertEquals(expected, actual);
@@ -38,8 +45,7 @@ public class CompanyServiceTest {
 
     @Test
     @TestTransaction
-    public void testFindAll() {
-        Company company = createCompany();        
+    public void testFindAll() {        
         service.save(company);
         
         List<Company> companies = new ArrayList<>();
