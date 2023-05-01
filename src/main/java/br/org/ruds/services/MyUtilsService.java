@@ -1,17 +1,17 @@
 package br.org.ruds.services;
 
+import br.org.ruds.utils.CalcUtils;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 @ApplicationScoped
 public class MyUtilsService {
     
-    public boolean isPrimeNumber(int number) {
-        if (number <= 1) return false;
+    @Inject
+    CalcUtils calcUtils;
 
-        for (int i = 2; i < number; i++) {
-            if(number % i == 0) return false;
-        }
-        return true;
+    public boolean isPrimeNumber(int number) {
+        return calcUtils.calcPrimeNumber(number);
     }
 
     public int countCharacters(String input) {
